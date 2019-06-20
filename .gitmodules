@@ -1,0 +1,6 @@
+[submodule "pEVSL"]
+	path = pEVSL
+	url = https://github.com/ivotron/pEVSL
+[submodule "submodules/pEVSL"]
+	path = submodules/pEVSL
+	url = https://github.com/js109/pEVSL
