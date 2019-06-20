@@ -4,3 +4,6 @@
 [submodule "submodules/pEVSL"]
 	path = submodules/pEVSL
 	url = https://github.com/js109/pEVSL
+[submodule "submodules/NormalModes"]
+	path = submodules/NormalModes
+	url = https://github.com/js1019/NormalModes
