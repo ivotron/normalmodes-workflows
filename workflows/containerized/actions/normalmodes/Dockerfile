@@ -10,6 +10,3 @@ RUN apt update && \
       libmetis-dev libscotchparmetis-dev && \
     rm -rf /var/lib/apt/lists/*
 
-ADD entrypoint.sh /
-
-ENTRYPOINT ["/entrypoint.sh"]

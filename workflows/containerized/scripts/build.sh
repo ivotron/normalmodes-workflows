@@ -34,8 +34,8 @@ popd
 popd
 
 # copy configuration
-#cp $NORMALMODES_MAKEFILE_IN submodules/NormalModes/makefile.in
-#
-## build lib
-#pushd submodules/NormalModes
-#make
+cp $NORMALMODES_MAKEFILE_IN submodules/NormalModes/makefile.in
+
+# build lib
+pushd submodules/NormalModes/src
+make
