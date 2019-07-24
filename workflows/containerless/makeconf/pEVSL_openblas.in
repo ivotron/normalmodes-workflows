@@ -1,0 +1,30 @@
+INTEL = 0
+
+# Compilers
+ifeq ($(INTEL), 1)
+MKLROOT = /opt/intel/mkl
+CC = mpiicc
+else
+CC = mpicc
+endif
+LINK = $(CC)
+
+# Common flags
+# Debug mode
+PEVSL_DEBUG = -DPEVSL_DEBUG
+FLAGS = -DUNIX -O3 -g -Wall $(PEVSL_DEBUG) $(TIMING)
+
+##OBJ_TIME = mactime.o
+OBJ_TIME = timing.o 
+
+# ar 
+AR = ar rv
+RANLIB = ranlib
+
+ifeq ($(INTEL), 1)
+FLAGS += -DUSE_MKL
+LIBLAPACK =  -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_intel_thread.a ${MKLROOT}/lib/intel64/libmkl_core.a ${MKLROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group -liomp5 -lpthread -lm -ldl
+else
+LIBLAPACK = -lopenblas -lpthread
+LIB0 = -lgfortran -lm
+endif
