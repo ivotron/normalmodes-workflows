@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 #SBATCH -J s1p1test
 #SBATCH -o s1p1test_%j.txt
 #SBATCH -e errs1p1test_%j.err
@@ -10,10 +9,16 @@ set -e
 #SBATCH --export=ALL
 #SBATCH --time=2:00:00
 #SBATCH -A TG-EAR170019
+set -e
 
-export OMP_NUM_THREADS=2
-#export MV2_ENABLE_AFFINITY=0
+# load dependencies
+source ./workflows/containerless/scripts/env-setup.sh
 
-pushd ./submodules/NormalModes/demos
-mpirun --allow-run-as-root -np 1 --mca btl_base_warn_component_unused 0 ./../bin/plmvcg_popper.out
-popd
+if [ -z "$MPI_NUM_PROCESSES" ]; then
+  echo "No MPI_NUM_ROCESSES variable defined"
+  exit
+fi
+
+cd ./submodules/NormalModes/demos
+
+mpirun -np "$MPI_NUM_PROCESSES" ../bin/plmvcg_popper.out

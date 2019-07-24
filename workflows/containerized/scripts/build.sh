@@ -11,11 +11,15 @@ if [ ! -d "./submodules/NormalModes" ]; then
 fi
 
 if [ -z "$PEVSL_MAKEFILE_IN" ]; then
-  echo "Expecting PEVSL_MAKEFILE_IN folder"
+  echo "Expecting PEVSL_MAKEFILE_IN variable"
   exit 1
 fi
 if [ -z "$NORMALMODES_MAKEFILE_IN" ]; then
-  echo "Expecting NORMALMODES_MAKEFILE_IN folder"
+  echo "Expecting NORMALMODES_MAKEFILE_IN variable"
+  exit 1
+fi
+if [ -z "$NUM_BUILD_JOBS" ]; then
+  echo "Expecting NUM_BUILD_JOBS variable"
   exit 1
 fi
 
@@ -24,11 +28,11 @@ cp $PEVSL_MAKEFILE_IN submodules/pEVSL/makefile.in
 
 # build lib
 pushd submodules/pEVSL
-make
+make -j"$NUM_BUILD_JOBS"
 
 # build tests
 pushd TESTS/Lap
-make
+make -j"$NUM_BUILD_JOBS"
 
 popd
 popd
@@ -38,4 +42,4 @@ cp $NORMALMODES_MAKEFILE_IN submodules/NormalModes/makefile.in
 
 # build lib
 pushd submodules/NormalModes/src
-make
+make -j"$NUM_BUILD_JOBS"

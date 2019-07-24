@@ -19,7 +19,9 @@ The [workflow](./main.workflow) consists of three actions:
 
   * **`run`**. Compute the Normal Modes for a constant perfectly 
     spherically symmetric pure solid ball has a size of the Earth; 
-    using the Model from [demos](./../submodules/NormalModes/demos)
+    using the Model from [demos](./../submodules/NormalModes/demos). 
+    The `global_conf` file in that file can be modified in order to 
+    run other examples.
 
 ## Execution
 
