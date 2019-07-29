@@ -14,6 +14,7 @@ action "build" {
 
 action "test" {
   needs = "build"
+  uses = "sh"
   args = "workflows/containerless/scripts/test.sh"
 }
 

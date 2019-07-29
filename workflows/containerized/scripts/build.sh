@@ -28,7 +28,7 @@ cp $PEVSL_MAKEFILE_IN submodules/pEVSL/makefile.in
 
 # build lib
 pushd submodules/pEVSL
-make -j"$NUM_BUILD_JOBS"
+make clean; make -j"$NUM_BUILD_JOBS"
 
 # build tests
 pushd TESTS/Lap
