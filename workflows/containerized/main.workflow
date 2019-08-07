@@ -1,5 +1,5 @@
 workflow "containers" {
-  resolves = "run"
+  resolves = "validate"
 }
 
 action "build" {
@@ -35,3 +35,13 @@ action "run" {
     MPI_NUM_PROCESSES = "1"
   }
 }
+
+action "validate" {
+  needs = "run"
+  uses = "actions/bin/sh@master"
+  runs = "./workflows/containerized/scripts/validate.sh"
+  env = {
+    MPI_NUM_PROCESSES = "1"
+  }
+}
+

@@ -24,4 +24,4 @@ mpirun \
   --allow-run-as-root \
   -np "$MPI_NUM_PROCESSES" \
   --mca btl_base_warn_component_unused 0 \
-  "$NMBIN"
+  "$NMBIN" > $GITHUB_WORKSPACE/workflows/containerized/normal_modes.log
