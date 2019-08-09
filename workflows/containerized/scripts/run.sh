@@ -14,14 +14,18 @@ set -e
 
 if [ -z "$MPI_NUM_PROCESSES" ]; then
   echo "No MPI_NUM_ROCESSES variable defined"
-  exit
+  exit 1
+fi
+if [ -z "$INPUT_DIR" ]; then
+  echo "No INPUT_DIR variable defined"
+  exit 1
 fi
 
 NMBIN="$GITHUB_WORKSPACE/submodules/NormalModes/bin/plmvcg_popper.out"
-cd "$GITHUB_WORKSPACE/submodules/NormalModes/demos"
+cd "$GITHUB_WORKSPACE/$INPUT_DIR"
 
 mpirun \
   --allow-run-as-root \
   -np "$MPI_NUM_PROCESSES" \
   --mca btl_base_warn_component_unused 0 \
-  "$NMBIN" > $GITHUB_WORKSPACE/workflows/containerized/normal_modes.log
+  "$NMBIN" > $GITHUB_WORKSPACE/workflows/containerized/normalmodes.log

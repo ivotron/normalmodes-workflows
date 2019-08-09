@@ -1,5 +1,5 @@
 workflow "containers" {
-  resolves = "validate"
+  resolves = "generate vtk"
 }
 
 action "build" {
@@ -33,6 +33,9 @@ action "run" {
   runs = "./workflows/containerized/scripts/run.sh"
   env = {
     MPI_NUM_PROCESSES = "1"
+
+    # input parameters defined in global_conf file of this directory
+    INPUT_DIR = "submodules/NormalModes/demos/"
   }
 }
 
@@ -40,8 +43,11 @@ action "validate" {
   needs = "run"
   uses = "actions/bin/sh@master"
   runs = "./workflows/containerized/scripts/validate.sh"
-  env = {
-    MPI_NUM_PROCESSES = "1"
-  }
 }
 
+# input parameters defined in visualCmain.m file
+action "generate vtk" {
+  needs = "validate"
+  uses = "docker://popperized/octave:4.4"
+  args = "./workflows/containerized/scripts/visualCmain.m"
+}

@@ -5,7 +5,7 @@ planetary scales using the [NormalModes software package][nmgh].
 
 ## Workflow
 
-The [workflow](./main.workflow) consists of three actions:
+The [workflow](./main.workflow) consists of following actions:
 
   * **`build`**. Invokes the [`build.sh` script](./scripts/build.sh) 
     script, which builds both `pEVSL` and `NormalModes`. These can be 
@@ -23,6 +23,12 @@ The [workflow](./main.workflow) consists of three actions:
     in this directory can be modified to run other demos. The variable 
     `MPI_NUM_PROCESSES` is used to specify the number of MPI processes 
     to use for the job.
+
+  * **`validate`**. Checks the relative error, if its small (of the order ~10^-10)
+  the check passes, otherwise fails.
+
+  * **`generate vtk`**. Creates the `.vtk` file, by running the [visualCmain.m](./scripts/visualCmain.m)
+  and reading the parameters like `JOB`, `pOrder`, `nporc` etc from the file.
 
 ## Execution
 
@@ -74,6 +80,12 @@ Sample output
  Time elapsed =    41.091999999945983      seconds.
 ```
 
+## Visualization
+
+To visualize the `.vtk` file you can run [ParaView Web][paraview]
+on your system by using the [Docker ParaView Web][pvw-docker].
+
+
 [pevsl]: https://github.com/js1019/pEVSL
 [planetary-model]: https://github.com/js1019/PlanetaryModels#planetary-model-builder
 [mkl]: https://software.intel.com/en-us/mkl
@@ -84,3 +96,5 @@ Sample output
 [singularity]: https://github.com/sylabs/singularity
 [demos]: https://github.com/js1019/NormalModes/tree/master/demos
 [nmgh]: https://github.com/js1019/NormalModes
+[pvw-docker]: https://github.com/ivotron/docker-paraviewweb
+[paraview]: http://kitware.github.io/paraviewweb/

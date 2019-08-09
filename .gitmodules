@@ -7,3 +7,6 @@
 [submodule "submodules/NormalModes"]
 	path = submodules/NormalModes
 	url = https://github.com/js1019/NormalModes
+[submodule "submodules/PlanetaryModels"]
+	path = submodules/PlanetaryModels
+	url = https://github.com/js1019/PlanetaryModels/

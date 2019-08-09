@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-cat $GITHUB_WORKSPACE/workflows/containerized/normal_modes.log | grep "relative err. " > temp.log
+cat $GITHUB_WORKSPACE/workflows/containerized/normalmodes.log | grep "relative err. " > temp.log
 
 while read p; do
   if [[ ${p: -2} -lt 10 ]]; then
