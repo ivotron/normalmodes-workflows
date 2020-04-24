@@ -41,7 +41,7 @@ action "run" {
 
 action "validate" {
   needs = "run"
-  uses = "actions/bin/sh@master"
+  uses = "popperized/bin/sh@master"
   runs = "./workflows/containerized/scripts/validate.sh"
 }
 

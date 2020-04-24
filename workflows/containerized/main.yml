@@ -1,0 +1,30 @@
+version: 1
+steps:
+- id: build
+  uses: ./workflows/containerized/actions/normalmodes
+  runs: ./workflows/containerized/scripts/build.sh
+  env:
+    PEVSL_MAKEFILE_IN: ./workflows/containerized/makeconf/pEVSL_mkl.in
+    NORMALMODES_MAKEFILE_IN: ./workflows/containerized/makeconf/NormalModes_mkl.in
+    NUM_BUILD_JOBSL: 1
+
+- id: test
+  uses: ./workflows/containerized/actions/normalmodes
+  runs: [
+    "sh", "-c",
+    "cd ./submodules/pEVSL/TESTS/Lap/ && mpirun --allow-run-as-root -np 1 ./LapPLanN.ex -n 400 ./LapPLanN.ex -nx 20 -ny 20 -nz 20 -nslices 5 -a 0.6 -b 1.2"]
+
+- id: run
+  uses: ./workflows/containerized/normalmodes
+  runs: ./workflows/containerized/scripts/run.sh
+  env:
+    MPI_NUM_PROCESSES: 1
+    INPUT_DIR: submodules/NormalModes/demos/
+
+- id: validate
+  needs: popperized/bin/sh@master
+  runs: ./workflows/containerized/scripts/validate.sh
+
+- id: generate vtk
+  needs: docker://popperized/octave:4.4
+  args: ./workflows/containerized/scripts/visualCmain.m
