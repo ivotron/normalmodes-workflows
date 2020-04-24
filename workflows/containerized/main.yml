@@ -22,9 +22,9 @@ steps:
     INPUT_DIR: submodules/NormalModes/demos/
 
 - id: validate
-  needs: popperized/bin/sh@master
+  uses: popperized/bin/sh@master
   runs: ./workflows/containerized/scripts/validate.sh
 
 - id: generate vtk
-  needs: docker://popperized/octave:4.4
+  uses: docker://popperized/octave:4.4
   args: ./workflows/containerized/scripts/visualCmain.m
