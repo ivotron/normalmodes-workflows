@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -e
+
+export GITHUB_WORKSPACE=$(pwd)
+
 cat $GITHUB_WORKSPACE/workflows/containerized/normalmodes.log | grep "relative err. " > temp.log
 
 while read p; do

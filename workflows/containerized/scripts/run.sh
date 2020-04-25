@@ -11,6 +11,7 @@ set -e
 #SBATCH --time=2:00:00
 #SBATCH -A TG-EAR170019
 
+export GITHUB_WORKSPACE=$(pwd)
 
 if [ -z "$MPI_NUM_PROCESSES" ]; then
   echo "No MPI_NUM_ROCESSES variable defined"

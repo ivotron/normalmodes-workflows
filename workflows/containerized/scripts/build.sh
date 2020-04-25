@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+export GITHUB_WORKSPACE=$(pwd)
+
 if [ ! -d "./submodules/pEVSL" ]; then
   echo "Expecting ./submodules/pEVSL/ folder"
   exit 1
