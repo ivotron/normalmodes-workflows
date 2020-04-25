@@ -6,7 +6,7 @@ steps:
   env:
     PEVSL_MAKEFILE_IN: ./workflows/containerized/makeconf/pEVSL_mkl.in
     NORMALMODES_MAKEFILE_IN: ./workflows/containerized/makeconf/NormalModes_mkl.in
-    NUM_BUILD_JOBSL: 1
+    NUM_BUILD_JOBS: 1
 
 - id: test
   uses: ./workflows/containerized/actions/normalmodes
