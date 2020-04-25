@@ -4,7 +4,7 @@ workflow "containers" {
 
 action "build" {
   uses = "sh"
-  args = "workflows/containerless/scripts/build.sh"
+  runs = "workflows/containerless/scripts/build.sh"
   env = {
     PEVSL_MAKEFILE_IN = "workflows/containerless/makeconf/pEVSL_openblas.in"
     NORMALMODES_MAKEFILE_IN = "workflows/containerless/makeconf/NormalModes_openblas.in"
@@ -15,7 +15,7 @@ action "build" {
 action "test" {
   needs = "build"
   uses = "sh"
-  args = "workflows/containerless/scripts/test.sh"
+  runs = "workflows/containerless/scripts/test.sh"
 }
 
 action "run" {
